@@ -1,0 +1,9 @@
+# /etc/xinit/services/syslog.service
+# xinit service unit — syslogd
+
+Name        = syslog
+Description = System log daemon
+ExecStart   = /usr/sbin/syslogd -ss
+Restart     = 1
+RestartDelay= 2
+Enabled     = 1

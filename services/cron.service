@@ -1,0 +1,9 @@
+# /etc/xinit/services/cron.service
+
+Name        = cron
+Description = Periodic task scheduler
+After       = syslog
+ExecStart   = /usr/sbin/cron -s
+Restart     = 1
+RestartDelay= 3
+Enabled     = 1

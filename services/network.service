@@ -1,0 +1,8 @@
+# /etc/xinit/services/network.service
+
+Name        = network
+Description = Network interfaces
+ExecPre     = /sbin/ifconfig lo0 127.0.0.1
+ExecStart   = /sbin/dhclient em0
+OneShot     = 1
+Enabled     = 1

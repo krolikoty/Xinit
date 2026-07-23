@@ -1,0 +1,10 @@
+# /etc/xinit/services/sshd.service
+
+Name         = sshd
+Description  = OpenSSH daemon
+After        = network, syslog
+ExecStart    = /usr/sbin/sshd -D
+Restart      = 1
+RestartDelay = 5
+TimeoutStart = 10
+Enabled      = 1
