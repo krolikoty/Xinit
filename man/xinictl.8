@@ -1,0 +1,81 @@
+.Dd June 2025
+.Dt XINICTL 8
+.Os FreeBSD
+.Sh NAME
+.Nm xinictl
+.Nd service manager for xinit
+.Sh SYNOPSIS
+.Nm xinictl
+.Op Ar command Op Ar service
+.Sh DESCRIPTION
+.Nm
+manages services defined as unit files in
+.Pa /etc/xinit/services/ .
+Services are started in parallel; dependency ordering is honoured via the
+.Cm After
+key.
+.Sh COMMANDS
+.Bl -tag -width restart\ service
+.It Cm list
+List all loaded services with their current state.
+.It Cm status
+Alias for
+.Cm list .
+.It Cm start Ar service
+Start a stopped service.
+.It Cm stop Ar service
+Stop a running service (sends SIGTERM).
+.It Cm restart Ar service
+Restart a service.
+.It Cm reload
+Reload unit files (hot reload, where supported).
+.It Cm reboot
+Reboot the system.
+.It Cm poweroff
+Power off the system.
+.El
+.Sh UNIT FILE FORMAT
+Unit files are plain text key=value files with the
+.Pa .service
+extension, placed in
+.Pa /etc/xinit/services/ .
+.Pp
+.Bl -tag -width TimeoutStart
+.It Cm Name
+Service name (required).
+.It Cm Description
+Human-readable description.
+.It Cm ExecStart
+Command to run (required).
+.It Cm ExecStop
+Optional stop command.
+.It Cm ExecPre
+Command run before ExecStart.
+.It Cm After
+Comma-separated list of service names to wait for.
+.It Cm Restart
+Set to 1 to restart on failure.
+.It Cm RestartDelay
+Seconds between restart attempts (default 3).
+.It Cm TimeoutStart
+Seconds to wait for startup (default 30).
+.It Cm OneShot
+Set to 1 for run-once services.
+.It Cm Enabled
+Set to 0 to disable.
+.It Cm Environment
+KEY=value pairs passed to the process environment.
+.El
+.Sh FILES
+.Bl -tag -width indent
+.It Pa /etc/xinit/services/
+Service unit files.
+.It Pa /var/log/xinit/
+Per-service log files.
+.It Pa /run/xinit/xinictl.sock
+Control socket.
+.It Pa /run/xinit/<service>.pid
+PID files.
+.El
+.Sh SEE ALSO
+.Xr xinit 8

@@ -1,0 +1,35 @@
+.Dd June 2025
+.Dt XINIT 8
+.Os FreeBSD
+.Sh NAME
+.Nm xinit
+.Nd parallel init system for FreeBSD
+.Sh SYNOPSIS
+.Nm xinit
+.Sh DESCRIPTION
+.Nm
+is a PID 1 init daemon that spawns
+.Xr xinictl 8
+as its service manager.
+It provides:
+.Bl -bullet -compact
+.It
+Zombie reaping for all orphan processes
+.It
+Clean shutdown / reboot via SIGUSR1 / SIGUSR2
+.It
+Automatic respawn of
+.Nm xinictl
+if it exits unexpectedly
+.El
+.Sh FILES
+.Bl -tag -width indent
+.It Pa /var/log/xinit.log
+Main log file.
+.It Pa /run/xinit/xinit.pid
+PID file.
+.El
+.Sh SEE ALSO
+.Xr xinictl 8
+.Sh AUTHORS
+xinit project.
